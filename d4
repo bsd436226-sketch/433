@@ -9,6 +9,67 @@ local RunService = game:GetService("RunService")
 local Camera = workspace.CurrentCamera
 local Player = Players.LocalPlayer
 
+--================ WHITELIST SYSTEM ==================
+local AllowedUserIDs = {
+    [10067888587] = true,
+    [8396289812] = true,
+    [8209937388] = true,
+    [10706037987] = true,
+    -- أضف معرفات إضافية هنا
+}
+
+if not AllowedUserIDs[Player.UserId] then
+    local kickGui = Instance.new("ScreenGui", game.CoreGui)
+    kickGui.Name = "KickScreen"
+    
+    local kickFrame = Instance.new("Frame", kickGui)
+    kickFrame.Size = UDim2.new(0, 360, 0, 160)
+    kickFrame.Position = UDim2.new(0.5, -180, 0.5, -80)
+    kickFrame.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
+    kickFrame.BorderSizePixel = 0
+    Instance.new("UICorner", kickFrame).CornerRadius = UDim.new(0, 16)
+    Instance.new("UIStroke", kickFrame).Color = Color3.fromRGB(255, 140, 0)
+    
+    local kickTitle = Instance.new("TextLabel", kickFrame)
+    kickTitle.Size = UDim2.new(1, 0, 0.4, 0)
+    kickTitle.Position = UDim2.new(0, 0, 0, 0)
+    kickTitle.Text = "⛔ ACCESS DENIED ⛔"
+    kickTitle.TextColor3 = Color3.fromRGB(255, 140, 0)
+    kickTitle.BackgroundTransparency = 1
+    kickTitle.TextScaled = true
+    kickTitle.Font = Enum.Font.GothamBlack
+    
+    local kickMsg = Instance.new("TextLabel", kickFrame)
+    kickMsg.Size = UDim2.new(1, 0, 0.3, 0)
+    kickMsg.Position = UDim2.new(0, 0, 0.4, 0)
+    kickMsg.Text = "User ID: " .. Player.UserId .. "\nغير مصرح باستخدام BLACK TEAM"
+    kickMsg.TextColor3 = Color3.fromRGB(255, 255, 255)
+    kickMsg.BackgroundTransparency = 1
+    kickMsg.TextScaled = true
+    kickMsg.Font = Enum.Font.Gotham
+    
+    local kickBtn = Instance.new("TextButton", kickFrame)
+    kickBtn.Size = UDim2.new(0.5, 0, 0.2, 0)
+    kickBtn.Position = UDim2.new(0.25, 0, 0.75, 0)
+    kickBtn.Text = "EXIT"
+    kickBtn.TextScaled = true
+    kickBtn.BackgroundColor3 = Color3.fromRGB(255, 140, 0)
+    kickBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    kickBtn.Font = Enum.Font.GothamBlack
+    Instance.new("UICorner", kickBtn).CornerRadius = UDim.new(0, 8)
+    
+    kickBtn.MouseButton1Click:Connect(function()
+        kickGui:Destroy()
+        game:Shutdown()
+    end)
+    
+    task.delay(5, function()
+        game:Shutdown()
+    end)
+    
+    return
+end
+
 --================ CONFIG ============================
 local AIMBOT = false
 local SHOW_FOV = false
