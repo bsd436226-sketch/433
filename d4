@@ -8,7 +8,7 @@ local LocalPlayer = Players.LocalPlayer
 
 -- 🔐 نظام التحقق بالمعرف (User ID)
 local AllowedUserIDs = {
-    [9442124119] = true,   -- ضع معرفات اللاعبين المسموح لهم هنا
+    [10379842246] = true,   -- ضع معرفات اللاعبين المسموح لهم هنا
     [9490841403] = true,
     [7909497107] = true,
     [9305764007] = true,
